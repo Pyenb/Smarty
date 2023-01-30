@@ -15,8 +15,9 @@ To install ImageAI, run the python installation instruction below in the command
 - [Download and Install](https://www.python.org/downloads/) **Python 3.7**, **Python 3.8**, **Python 3.9** or **Python 3.10**
 - Install dependencies
   - Download `requirements.txt` file and install via the command
-    ```
-    pip install -r requirements.txt
+    
+    ```bash
+    > pip install -r requirements.txt
     ```
     
 ## Installation
