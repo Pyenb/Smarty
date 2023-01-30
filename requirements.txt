@@ -12,3 +12,4 @@ mock==4.0.3
 pycocotools@git+https://github.com/gautamchitnis/cocoapi.git@cocodataset-master#subdirectory=PythonAPI
 torch>=1.9.0 --extra-index-url https://download.pytorch.org/whl/cu102
 torchvision>=0.10.0 --extra-index-url https://download.pytorch.org/whl/cu102
+imageai==3.0.3
