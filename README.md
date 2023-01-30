@@ -40,7 +40,7 @@ The `train.py` uses the data, from the folder *dataset* to train the model, the 
 
 `video.py` is just apply the model on the video in the *videos* folder:
 
-[video](videos/smart_detected.gif)
+![](https://github.com/Pyenb/Smarty/blob/master/videos/smart_detected.gif)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
