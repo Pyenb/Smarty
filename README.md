@@ -33,14 +33,14 @@ The `train.py` uses the data, from the folder *dataset* to train the model, the 
 `demo.py` simply applies the model to all available pictures in the *images* folder:
 
 ![undetected](images/1.jpg?raw=true "Title")
-![detect](images/1_detected.jpg?raw=true "Title")
+![detect](images/1.jpg_detected.jpg?raw=true "Title")
 
 ![undetected](images/2.jpg?raw=true "Title")
-![detect](images/2_detected.jpg?raw=true "Title")
+![detect](images/2.jpg_detected.jpg?raw=true "Title")
 
 `video.py` is just apply the model on the video in the *videos* folder:
 
-[](https://github.com/Pyenb/Smarty/blob/master/videos/smart_detected.gif)
+[video](videos/smart_detected.gif)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
