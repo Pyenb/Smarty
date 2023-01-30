@@ -7,7 +7,6 @@ The
 ## Prerequisites
 
 - Python 3+
-- [ImageAI](https://github.com/OlafenwaMoses/ImageAI) 
 
 ## Dependencies
  
