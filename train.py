@@ -11,7 +11,7 @@ trainer.setDataDirectory(data_directory="/content/drive/MyDrive/Programmieren/Py
 trainer.setTrainConfig(
     object_names_array=["Smart"],
     batch_size=4,
-    num_experiments=200#,
+    num_experiments=200,
     train_from_pretrained_model=latest_file
     )
 trainer.trainModel()
