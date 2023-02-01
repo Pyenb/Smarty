@@ -1,8 +1,16 @@
 from imageai.Detection.Custom import CustomVideoObjectDetection
-import glob, os
+import glob
 
+himAP = 0
 list_of_files = glob.glob('/content/drive/MyDrive/Programmieren/Python/Smarty/dataset/models/*.pt')
-latest_file = max(list_of_files, key=os.path.getctime).replace("\\", "/")
+for file in list_of_files:
+    if 'last' in file:
+        list_of_files.remove(file)
+for file in list_of_files:
+    mAP = float(file.split('mAP-')[1].split('_')[0])
+    if mAP > himAP:
+        himAP = mAP
+        latest_file = file.replace("\\", "/")
 print(latest_file)
 
 video_detector = CustomVideoObjectDetection()
