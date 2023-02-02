@@ -1,16 +1,7 @@
 from imageai.Detection.Custom import DetectionModelTrainer
-import glob
+from select_model import select
 
-himAP = 0
-list_of_files = glob.glob('/content/drive/MyDrive/Programmieren/Python/Smarty/dataset/models/*.pt')
-for file in list_of_files:
-    if 'last' in file:
-        list_of_files.remove(file)
-for file in list_of_files:
-    mAP = float(file.split('mAP-')[1].split('_')[0])
-    if mAP > himAP:
-        himAP = mAP
-        latest_file = file
+latest_file = select()
 print(latest_file)
 
 trainer = DetectionModelTrainer()
