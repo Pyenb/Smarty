@@ -1,10 +1,10 @@
-import glob
+import glob, os
 
-def select(env='colab'):
+def select():
     himAP = 0
-    if env == 'colab':
+    if 'COLAB_GPU' in os.environ:
         list_of_files = glob.glob('/content/drive/MyDrive/Programmieren/Python/Smarty/dataset/models/*.pt')
-    elif env == 'local':
+    else:
         list_of_files = glob.glob('dataset/models/*.pt')
     for file in list_of_files:
         if 'last' in file:
@@ -14,4 +14,4 @@ def select(env='colab'):
         if mAP > himAP:
             himAP = mAP
             latest_file = file
-    return latest_file
+    return latest_file.replace("\\", "/")
