@@ -5,10 +5,11 @@ import json
 latest_file = select()
 print(latest_file)
 
-def forFrame(frame_number, output_array, output_count, save_output):
-    print(f'Frame: {frame_number} | Output: {output_array} | Count: {output_count}')
-    if save_output:
-        open("/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt", 'a+').write(json.dumps({"frame_number": frame_number, "output_array": output_array, "output_count": output_count}) + "\n")
+open("/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt", 'w+').close()
+
+def forFrame(frame_number, output_array, output_count):
+    #print(f'Frame: {frame_number} | Output: {output_array} | Count: {output_count}')
+    open("/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt", 'a+').write(json.dumps({"frame_number": frame_number, "output_array": output_array, "output_count": output_count}) + "\n").close()
 
 def detection(input_file_path, output_file_path, frames_per_second, minimum_percentage_probability):
     video_detector = CustomVideoObjectDetection()
@@ -21,9 +22,5 @@ def detection(input_file_path, output_file_path, frames_per_second, minimum_perc
                                             output_file_path=output_file_path,
                                             frames_per_second=frames_per_second,
                                             per_frame_function=forFrame,
-                                            minimum_percentage_probability=minimum_percentage_probability)
-    
-#detection("/content/drive/MyDrive/Programmieren/Python/Smarty/videos/smart.mp4",
-#          "/content/drive/MyDrive/Programmieren/Python/Smarty/videos/smart_detected.mp4",
-#          20,
-#          40)
+                                            minimum_percentage_probability=minimum_percentage_probability,
+                                            log_progress=True)
