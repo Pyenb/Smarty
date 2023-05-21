@@ -1,77 +1,93 @@
 import sys, os, cv2, json
-sys.path.insert(1, '/content/drive/MyDrive/Programmieren/Python/Smarty')
-
 from pytube import YouTube
-from pytube.cli import on_progress
-from video import detection
+from tqdm.auto import tqdm
+
+SMARTY_PATH = '/content/drive/MyDrive/Programmieren/Python/Smarty'
+SETTINGS_FILE_PATH = os.path.join(SMARTY_PATH, 'data-collection/settings.json')
+
+sys.path.insert(1, SMARTY_PATH)
+from video_detection import detection
+
+def load_settings():
+    global SETTINGS
+    with open(SETTINGS_FILE_PATH, 'r') as settings_file:
+        SETTINGS = json.load(settings_file)
+
+load_settings()
+
+def bool_input(question, default):
+    answer = input(question).lower()
+    if answer == "y": return True
+    elif answer == "n": return False
+    elif answer == "": return default
+    else: return bool_input(question, default)
 
 def download_youtube_video(video_url, output_directory):
-    # Video herunterladen
-    yt = YouTube(video_url, on_progress_callback=on_progress)
+    yt = YouTube(video_url)
     video = yt.streams.get_highest_resolution()
     video_path = video.download(output_path=output_directory)
-    
-    print(video_path)
+    print(f'{video.title} - loaded.')
     return video_path
 
-def capture_frames(video_path, frame_list, output_directory):
-    # Frames erstellen
+def capture_frames(video_path, frame_list, output_directory, video_title):
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
     
-    counter = 0
-    for frame_number in frame_list:
-        counter += 1
-        # Frame-Position in Sekunden berechnen
-        frame_time = frame_number / fps
-        
-        # Zum entsprechenden Frame springen
-        cap.set(cv2.CAP_PROP_POS_FRAMES, int(frame_time * fps))
-        
-        # Frame abrufen
-        ret, frame = cap.read()
-        if ret:
-            # Dateiname für den Screenshot erstellen
-            ID = video_path.split('=')[1]
-            output_file = os.path.join(output_directory, f"ID_{ID}_frame_{frame_number}.png")
-            
-            # Screenshot speichern
-            cv2.imwrite(output_file, frame)
-            
-            print(f"{counter}: {output_file} erstellt.")
+    progress_bar = tqdm(frame_list, desc=f"Screenshotting", unit="frame")
     
-    # Aufräumen
+    for frame_number in progress_bar:
+        frame_time = frame_number / fps
+        cap.set(cv2.CAP_PROP_POS_FRAMES, int(frame_time * fps))
+        ret, frame = cap.read()
+        
+        if ret:
+            output_pictures = os.path.join(output_directory, f"{video_title}_{frame_number}.png")
+            cv2.imwrite(output_pictures, frame)
+            progress_bar.set_postfix({"Frame": frame_number})
+    
     cap.release()
     cv2.destroyAllWindows()
 
 def capture_youtube_screenshots(video_url, frame_list, output_directory):
-    # Video herunterladen
     video_path = download_youtube_video(video_url, output_directory)
+    if not bool_input("Skip detection? (y/N): ", False):
+        detected = video_path.replace(".mp4", "_detected")
+        detection(video_path, detected, SETTINGS["Detection"]["output_FPS"], SETTINGS["Detection"]["minimum_probability"], SETTINGS["Detection"]["save_detected_video"])
+        try: os.remove(detected)
+        except: pass
+    video_title = YouTube(video_url).title
+    print(video_title)
+    capture_frames(video_path, frame_list, output_directory, video_title)
     
-    detected = video_path.replace(".mp4", "_detected.mp4")
-    detection(video_path, detected, 20, 40)
-    
-    # Frames erstellen
-    capture_frames(video_path, frame_list, output_directory)
-    
-    # Video-Datei löschen
-    os.remove(video_path)
-    os.remove(detected)
+    if bool_input("Delete files? (Y/n): ", True):
+        os.remove(video_path)
+        os.remove(SETTINGS["Files"]["output_file_path"])
 
-def get_frames(snip_at):
+def get_frames(snip_at=0, all_frames=False):
     frames = []
-    counter = 0
-    output_file = open('/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt', 'r')
-    for i in output_file.readlines():
-        if counter == snip_at:
-            frame = json.loads(i)
-            if frame['output_count'] != {}:
-                frames.append(frame['frame_number'])
-            counter = 0
-        counter += 1
-    output_file.close()
+    if not os.path.exists(SETTINGS["Files"]["output_file_path"]):
+        open(SETTINGS["Files"]["output_file_path"], 'w+').close()
+    
+    with open(SETTINGS["Files"]["output_file_path"], 'r') as frame_file:
+        counter = 0
+        
+        for line in frame_file.readlines():
+            if all_frames or counter == snip_at:
+                frame = json.loads(line)
+                if frame['output_count'] != {}:
+                    frames.append(frame['frame_number'])
+                counter = 0
+            counter += 1
+    
     return frames
 
-video_url = "https://www.youtube.com/watch?v=SgBzXAZy40s"
-output_dir = "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/screenshots"
-capture_youtube_screenshots(video_url, get_frames(10), output_dir)
+def main():
+    video_url = input("Video URL: ") or "https://www.youtube.com/watch?v=V2rxegdBpD0"
+    
+    all_frames = bool_input("Take all detected frames? (Y/n): ", True)
+    output_dir = SETTINGS["Files"]["screenshot_output_path"]
+    
+    capture_youtube_screenshots(video_url, get_frames(SETTINGS["Screenshots"]["every_N_frames"], all_frames), output_dir)
+
+if __name__ == "__main__":
+    main()

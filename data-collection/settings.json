@@ -1,0 +1,15 @@
+{
+    "Detection": {
+        "output_FPS": 20,
+        "minimum_probability": 40,
+        "save_detected_video": false
+    },
+    "Screenshots": {
+        "every_N_frames": 100
+    },
+    "Files": {
+        "output_file_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt",
+        "screenshot_output_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/screenshots",
+        "json_file_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/dataset/json/dataset_yolov3_detection_config.json"
+    }
+}
