@@ -57,8 +57,8 @@ def capture_youtube_screenshots(video_url, frame_list, detection_result_path, sc
         detection(video_path, detected, SETTINGS["Detection"]["output_FPS"], SETTINGS["Detection"]["minimum_probability"], SETTINGS["Detection"]["save_detected_video"])
         try: os.remove(detected)
         except: pass
-    print("Waiting 10 seconds for screenshots to load...")
-    sleep(10)
+        print("Waiting 10 seconds for screenshots to load...")
+        sleep(10)
     capture_frames(video_path, frame_list, screenshot_dir, video_ID)
     
     if bool_input("Delete files? (Y/n): ", True):
