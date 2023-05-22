@@ -9,8 +9,8 @@ trainer.setModelTypeAsYOLOv3()
 trainer.setDataDirectory(data_directory="/content/drive/MyDrive/Programmieren/Python/Smarty/dataset")
 trainer.setTrainConfig(
     object_names_array=["Smart"],
-    batch_size=4,
-    num_experiments=200,
+    batch_size=32,
+    num_experiments=400,
     train_from_pretrained_model=latest_file
     )
 trainer.trainModel()
