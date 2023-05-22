@@ -23,14 +23,14 @@ def bool_input(question, default):
     elif answer == "": return default
     else: return bool_input(question, default)
 
-def download_youtube_video(video_url, output_directory):
+def download_youtube_video(video_url, video_dir):
     yt = YouTube(video_url)
     video = yt.streams.get_highest_resolution()
-    video_path = video.download(output_path=output_directory)
+    video_path = video.download(output_path=video_dir)
     print(f'{video.title} - loaded.')
     return video_path, yt.video_id
 
-def capture_frames(video_path, frame_list, output_directory, video_ID):
+def capture_frames(video_path, frame_list, screenshot_dir, video_ID):
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
     
@@ -42,7 +42,7 @@ def capture_frames(video_path, frame_list, output_directory, video_ID):
         ret, frame = cap.read()
         
         if ret:
-            output_pictures = os.path.join(output_directory, f"{video_ID}_{frame_number}.png")
+            output_pictures = os.path.join(screenshot_dir, f"{video_ID}_{frame_number}.png")
             cv2.imwrite(output_pictures, frame)
             progress_bar.set_postfix({"Frame": frame_number})
     
@@ -50,8 +50,8 @@ def capture_frames(video_path, frame_list, output_directory, video_ID):
     cap.release()
     cv2.destroyAllWindows()
 
-def capture_youtube_screenshots(video_url, frame_list, output_directory):
-    video_path, video_ID = download_youtube_video(video_url, output_directory)
+def capture_youtube_screenshots(video_url, frame_list, detection_result_path, screenshot_dir, video_dir):
+    video_path, video_ID = download_youtube_video(video_url, video_dir)
     if not bool_input("Skip detection? (y/N): ", False):
         detected = video_path.replace(".mp4", "_detected")
         detection(video_path, detected, SETTINGS["Detection"]["output_FPS"], SETTINGS["Detection"]["minimum_probability"], SETTINGS["Detection"]["save_detected_video"])
@@ -59,18 +59,18 @@ def capture_youtube_screenshots(video_url, frame_list, output_directory):
         except: pass
     print("Waiting 10 seconds for screenshots to load...")
     sleep(10)
-    capture_frames(video_path, frame_list, output_directory, video_ID)
+    capture_frames(video_path, frame_list, screenshot_dir, video_ID)
     
     if bool_input("Delete files? (Y/n): ", True):
         os.remove(video_path)
-        os.remove(SETTINGS["Files"]["output_file_path"])
+        os.remove(detection_result_path)
 
-def get_frames(snip_at=0, all_frames=False):
+def get_frames(detection_result_path, snip_at=20, all_frames=False):
     frames = []
-    if not os.path.exists(SETTINGS["Files"]["output_file_path"]):
-        open(SETTINGS["Files"]["output_file_path"], 'w+').close()
+    if not os.path.exists(detection_result_path):
+        open(detection_result_path, 'w+').close()
     
-    with open(SETTINGS["Files"]["output_file_path"], 'r') as frame_file:
+    with open(detection_result_path, 'r') as frame_file:
         counter = 0
         
         for line in frame_file.readlines():
@@ -87,9 +87,11 @@ def main():
     video_url = input("Video URL: ") or "https://www.youtube.com/watch?v=V2rxegdBpD0"
     
     all_frames = bool_input("Take all detected frames? (Y/n): ", True)
-    output_dir = SETTINGS["Files"]["screenshot_output_path"]
+    screenshot_dir = SETTINGS["Files"]["screenshot_output_path"]
+    video_dir = SETTINGS["Files"]["video_output_path"]
+    detection_result_path = SETTINGS["Files"]["output_file_path"]
     
-    capture_youtube_screenshots(video_url, get_frames(SETTINGS["Screenshots"]["every_N_frames"], all_frames), output_dir)
+    capture_youtube_screenshots(video_url, get_frames(detection_result_path, SETTINGS["Screenshots"]["every_N_frames"], all_frames), detection_result_path, screenshot_dir, video_dir)
 
 if __name__ == "__main__":
     main()

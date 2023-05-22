@@ -10,6 +10,7 @@
     "Files": {
         "output_file_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt",
         "screenshot_output_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/screenshots",
+        "video_output_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/videos",
         "json_file_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/dataset/json/dataset_yolov3_detection_config.json"
     }
 }
