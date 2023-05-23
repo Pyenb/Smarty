@@ -5,7 +5,7 @@
         "save_detected_video": false
     },
     "Screenshots": {
-        "every_N_frames": 100
+        "every_N_frames": 25
     },
     "Files": {
         "output_file_path": "/content/drive/MyDrive/Programmieren/Python/Smarty/data-collection/output.txt",

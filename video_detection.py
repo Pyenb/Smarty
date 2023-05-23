@@ -31,7 +31,7 @@ def detection(input_file_path, output_file_path, frames_per_second, minimum_perc
     global progress_bar
     set_total(input_file_path)
     
-    progress_bar = tqdm(total=total_frames, desc="Processing")
+    progress_bar = tqdm(total=total_frames, desc="Detecting", unit="frame")
     
     video_detector = CustomVideoObjectDetection()
     video_detector.setModelTypeAsYOLOv3()
