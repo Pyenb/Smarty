@@ -30,7 +30,7 @@ def download_youtube_video(video_url, video_dir):
         progress_bar.update(bytes_downloaded - progress_bar.n)
     
     yt = YouTube(video_url, on_progress_callback=progress_callback)
-    video = yt.streams.get_highest_resolution()
+    video = yt.streams.filter(adaptive=True, file_extension='mp4').first()
     
     file_size = video.filesize
     progress_bar = tqdm(total=file_size, unit='bytes', unit_scale=True, desc="Downloading")
