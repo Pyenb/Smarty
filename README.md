@@ -12,16 +12,15 @@ Smarty
 
 ## 📚 Table of Contents
 - [📚 Table of Contents](#-table-of-contents)
-- [📍Overview](#-introdcution)
+- [📍Overview](#overview)
 - [🔮 Features](#-features)
-- [⚙️ Project Structure](#project-structure)
-- [🧩 Modules](#modules)
-- [🏎💨 Getting Started](#-getting-started)
-- [🗺 Roadmap](#-roadmap)
+- [⚙️ Project Structure](#%EF%B8%8F-project-structure)
+- [🧩 Modules](#-modules)
+- [🚀 Getting Started](#-getting-started)
+- [🛠 Future Development](#-future-development)
 - [🤝 Contributing](#-contributing)
-- [🪪 License](#-license)
-- [📫 Contact](#-contact)
-- [🙏 Acknowledgments](#-acknowledgments)
+- [📃 License](#license)
+- [📚Disclaimer](#disclaimer)
 
 ---
 
@@ -33,7 +32,7 @@ This is done through a [dataset](https://app.roboflow.com/anon-vqjqq/smarty) I c
 
 ---
 
-## 🔮 Feautres
+## 🔮 Features
 
 ### Distinctive Features
 
@@ -173,12 +172,14 @@ The youtube_analysis.py script offers functionalities for YouTube video analysis
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### License
+---
+
+### 📃 License
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ---
-## Disclaimer
+## 📚 Disclaimer
 This repository is for research purposes only, the use of this code is your responsibility.
 
 I take NO responsibility and/or liability for how you choose to use any of the source code available here. By using any of the files available in this repository, you understand that you are AGREEING TO USE AT YOUR OWN RISK. Once again, ALL files available here are for EDUCATION and/or RESEARCH purposes ONLY.
