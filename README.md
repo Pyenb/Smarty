@@ -17,6 +17,7 @@ Smarty
 - [⚙️ Project Structure](#%EF%B8%8F-project-structure)
 - [🧩 Modules](#-modules)
 - [🚀 Getting Started](#-getting-started)
+- [🤖 Using Smarty](#-using-smarty)
 - [🛠 Future Development](#-future-development)
 - [🤝 Contributing](#-contributing)
 - [📃 License](#-license)
@@ -128,6 +129,8 @@ cd Smarty
 pip install -r requirements.txt
 ```
 
+---
+
 ### 🤖 Using Smarty
 
 The project is designed to be used with Google Colab, so some adjustments may be required for different environments.
@@ -157,6 +160,8 @@ This script facilitates the conversion of label data by replacing type values in
 
 - `youtube_analysis.py`
 The youtube_analysis.py script offers functionalities for YouTube video analysis. It can download a YouTube video, capture frames from the video, perform object detection on the frames, and save screenshots. The script relies on the pytube library for video downloading and uses OpenCV for frame extraction and image saving. The video_detection module is imported for object detection using the YOLOv3 model.
+
+---
 
 ## 🛠 Future Development
 - [X] [📌  Adding Youtube video analysis]
