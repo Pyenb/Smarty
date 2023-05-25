@@ -35,7 +35,9 @@ This is done through a [dataset](https://app.roboflow.com/anon-vqjqq/smarty) I c
 
 ## 🔮 Feautres
 
-### Distinctive Features
+Smarty is a project that utilizes [ImageAI](https://github.com/OlafenwaMoses/ImageAI) to detect cars from the brand *Smart* on the road.\
+This is done through a [dataset](https://app.roboflow.com/anon-vqjqq/smarty) I compiled and annotated, consisting of around 430 pictures (for now at least).\
+The 
 
 1. **Architecture:** The project is built with ImageAI and YOLOv3, and provides a comprehensive set of scripts that enable users to quickly and easily start tracking Smarts.
 
