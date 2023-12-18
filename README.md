@@ -1,3 +1,4 @@
+# UNMAINTAINED. I've switched to the much more recent YOLOv8 and built my own Homelab server, with a pretty big AI related release coming soon... So stay tuned!
 
 <div align="center">
 <h1 align="center">
