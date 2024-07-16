@@ -1,5 +1,3 @@
-# Unmaintained: I've switched to the much more recent YOLOv8 and built my own Homelab server, with a pretty big AI related release coming soon... So stay tuned!
-
 <div align="center">
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" />
