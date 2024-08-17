@@ -8,7 +8,7 @@ Smarty
 </div>
 
 
-Update: Repo is now archived, as I have moved on to other projects. Feel free to fork and continue the development of this project. Dataset needs to be unzipped and added to the root of the project.
+Update: Repo is now archived, as I have moved on to other projects. Feel free to fork and continue the development of this project.
 
 ---
 
