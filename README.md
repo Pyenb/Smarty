@@ -8,7 +8,7 @@ Smarty
 </div>
 
 
-Update: Repo is now archived, as I have moved on to other projects. Feel free to fork and continue the development of this project. The dataset can be downloaded [here](https://data.pyenb.network/github/Smarty/dataset.zip). It needs to be extracted in the root directory of the project.
+Update: Repo is now archived, as I have moved on to other projects. Feel free to fork and continue the development of this project. The dataset can be downloaded [here](https://data.pyenb.network/Github/Smarty/dataset.zip). It needs to be extracted in the root directory of the project.
 
 ---
 
